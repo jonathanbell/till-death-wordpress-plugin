@@ -1,3 +1,4 @@
 github.php
 post-post-receive.php
 *.log
+error_log
