@@ -46,6 +46,6 @@ add_action('wp_footer', 'tilldeath_append_html', 1);
 function tilldeath_add_inline_js() {
   // date example: new Date(2011, 4-1, 13, 17, 08, 0)
   // year, month-1(less one, zero based), day, 24hrs, min, sec
-  echo '<script>jQuery(\'#countdown\').countdown({since: new Date(1981, 1-1, 11, 5, 35, 35), timezone:-7, format:\'YODHMS\', compact: true});</script>';
+  echo '<script>jQuery(\'#countdown\').countdown({since: new Date(1981, 1-1, 11, 17, 35, 35), timezone:-7, format:\'YODHMS\', compact: true});</script>';
 }
 add_action('wp_footer', 'tilldeath_add_inline_js', 100);
