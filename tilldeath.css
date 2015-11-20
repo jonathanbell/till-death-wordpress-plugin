@@ -1,0 +1,8 @@
+#countdownwrapper {
+  text-align: center;
+  cursor: default;
+}
+
+#countdown {
+  padding-right: 5px;
+}
