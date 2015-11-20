@@ -3,7 +3,7 @@ Till Death
 
 Displays how old Jonathan Bell is in real time in the format years:months:days:hours:seconds.
 
-It's a Wordpress plugin that I use on http://30.jonathanbell.ca
+It's a Wordpress plugin that I use on [30.jonathanbell.ca](http://30.jonathanbell.ca).
 
 Hat tip to [Keith Wood](http://keith-wood.name/countdown.html).
 
