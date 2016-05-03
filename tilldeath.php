@@ -10,7 +10,7 @@
  */
 
 function tilldeath_add_countdown_js() {
-  wp_enqueue_script('countdown', plugins_url('countdown.js', __FILE__), array('jquery'));
+  wp_enqueue_script('countdown', plugins_url('countdown.js', __FILE__), array('jquery'), '', true);
 }
 add_action('wp_enqueue_scripts', 'tilldeath_add_countdown_js');
 
