@@ -39,8 +39,6 @@ function tilldeath_append_html() {
 add_action('wp_footer', 'tilldeath_append_html', 1);
 
 function tilldeath_add_inline_js_and_css() {
-  // inline our css since there is so little of it
-  echo '<style>#countdownwrapper { text-align: center; cursor: default; } #countdown { padding-right: 5px; }</style>';
   // date example: new Date(2011, 4-1, 13, 17, 08, 0)
   // year, month-1(less one, zero based), day, 24hrs, min, sec
   echo '<script>jQuery(\'#countdown\').countdown({since: new Date(1981, 1-1, 11, 17, 35, 35), timezone:-7, format:\'YODHMS\', compact: true});</script>';
