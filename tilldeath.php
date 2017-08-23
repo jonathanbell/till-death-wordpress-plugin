@@ -1,34 +1,34 @@
 <?php
 /**
  * Plugin Name: Till Death
- * Plugin URI: http://30.jonathanbell.ca
- * Description: Displays how old Jonathan Bell is in real time in the format years:months:days:hours:seconds.
- * Version: 0.01
+ * Plugin URI: https://github.com/jonathanbell/till-death-wordpress-plugin
+ * Description: Displays how old Jonathan Bell is in real time. Format: years:months:days:hours:seconds.
+ * Version: 1.0.0
  * Author: Jonathan Bell
  * Author URI: http://30.jonathanbell.ca
- * License: GPL2
+ * License: MIT
  */
 
 function tilldeath_add_countdown_js() {
-  wp_enqueue_script('countdown', plugins_url('countdown.js', __FILE__), array('jquery'), '', true);
+  wp_enqueue_script('countdown', plugins_url('js/countdown.min.js', __FILE__), array(), null, true);
 }
 add_action('wp_enqueue_scripts', 'tilldeath_add_countdown_js');
 
 function tilldeath_append_html() {
 
-  $str = '<div id="countdownwrapper"><span id="countdown"></span>';
+  $str = '<div style="margin: 1rem 0; text-align: center; font-family: monospace, \'Andale Mono\';" id="countdownwrapper"><span id="countdown"></span> ';
 
-  // check to see if you've turned 40 or not yet.
+  // Check to see if you've turned 40 or not yet.
   $bday_30 = strtotime('Jan 11th, 2011, 5:33:31pm'); // the moment you turned 30
-  $bday_40 = $bday_30 + 315569260; // add ten years in seconds
-  $days = floor(($_SERVER['REQUEST_TIME']-$bday_30)/86400); // 86400 seconds in a day
+  $bday_40 = $bday_30 + 315569260; // Add ten years in seconds.
+  $days = floor(($_SERVER['REQUEST_TIME']-$bday_30) / 86400); // Divide by 86400 seconds in a day.
 
   if ($_SERVER['REQUEST_TIME'] < $bday_40) {
-    $str .= '&raquo; <span style="padding-left: 2px">'.$days.' days deep</span>';
+    $str .= '&raquo; '.$days.' days deep';
   }
   else {
-    // you are > 40 years old
-    $str .= '&raquo; <span style="padding-left: 2px">It\'s all over...</span>';
+    // Jonathan Bell is > 40 years old.
+    $str .= '&raquo; It\'s all over...';
   }
 
   $str .= '</div>';
@@ -38,9 +38,34 @@ function tilldeath_append_html() {
 }
 add_action('wp_footer', 'tilldeath_append_html', 1);
 
-function tilldeath_add_inline_js_and_css() {
-  // date example: new Date(2011, 4-1, 13, 17, 08, 0)
+function tilldeath_add_inline_js() {
+
   // year, month-1(less one, zero based), day, 24hrs, min, sec
-  echo '<script>jQuery(\'#countdown\').countdown({since: new Date(1981, 1-1, 11, 17, 35, 35), timezone:-7, format:\'YODHMS\', compact: true});</script>';
+  $output = <<<EOF
+
+  <script>
+    var bday_clock = document.getElementById('countdown');
+    var bday = new Date(1981, 0, 11, 17, 33, 11, 0);
+
+    function padZeros(str) {
+      var str = '' + str;
+      var pad = '00';
+      var padded = pad.substring(0, pad.length - str.length) + str;
+
+      return padded;
+    }
+
+    window.setInterval(function() {
+
+      var current = countdown(bday);
+      bday_clock.textContent = current.years + ':' + current.months + ':' + current.days + ':' + current.hours + ':' + padZeros(current.minutes) + ':' + padZeros(current.seconds);
+
+    }, 1000);
+  </script>
+
+EOF;
+
+  echo $output;
+
 }
-add_action('wp_footer', 'tilldeath_add_inline_js_and_css', 100);
+add_action('wp_footer', 'tilldeath_add_inline_js');
