@@ -40,7 +40,7 @@ add_action('wp_footer', 'tilldeath_append_html', 1);
 
 function tilldeath_add_inline_js() {
 
-  // year, month-1(less one, zero based), day, 24hrs, min, sec
+  // Date format: year, month-1(less one, zero based), day, 24hrs, min, sec
   $output = <<<EOF
 
   <script>
